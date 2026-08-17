@@ -1,0 +1,16 @@
+merge_protections:
+  - name: code review required
+    if:
+      - base = main
+    success_conditions:
+      - "#approved-reviews-by >= 1"
+
+queue_rules:
+  - name: default
+    queue_conditions:
+      - "-draft"
+    merge_conditions:
+      - check-success = ci-gate
+    merge_method: merge
+    batch_size: 2
+    speculative_checks: 2
